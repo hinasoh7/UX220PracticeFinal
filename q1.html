@@ -15,6 +15,11 @@
             let nDaysLeft = Math.ceil((nPiDay.getTime()-today.getTime())/(nSeconds));
             console.log(nDaysLeft); //logs the value we are looking for in our heading
             // put your "secret sauce here to get this in to the document
+            if (nDaysLeft < 0) {
+                nPiDay.setFullYear(today.getFullYear() + 1);
+                nDaysLeft = Math.ceil((nPiDay.getTime() - today.getTime()) / nSeconds);
+            }
+            this.innerHTML = nDaysLeft;
         }
     }
 
@@ -23,7 +28,7 @@
     class PiDay extends HTMLElement{
         connectedCallback(){
             let today=new Date();
-            let nPiDay=new Date(today.getFullYear(), 2, 14);
+            let nPiDay=new Date(today.getFullYear() + 1, 2, 14);
             this.innerHTML = nPiDay.toLocaleDateString('en-CA');
         }
     }
